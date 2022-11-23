@@ -36,13 +36,14 @@ OBJS := $(OBJS:.c=.o)
 OBJS := $(OBJS:.cpp=.o)
 OBJS := $(OBJS:.S=.o)
 OBJS := $(OBJS:..=miaou)
+OBJS_ASM :=$(OBJS:.o=.asm)
 OBJS := $(addprefix $(OBJDIR)/,$(OBJS))
-
+OBJS_ASM := $(addprefix $(OBJDIR)/,$(OBJS_ASM))
 
 all: $(OBJDIR)/$(PROJ_NAME).elf $(OBJDIR)/$(PROJ_NAME).hex $(OBJDIR)/$(PROJ_NAME).asm $(OBJDIR)/$(PROJ_NAME).v
 
-$(OBJDIR)/%.elf: $(OBJS) | $(OBJDIR)
-	$(RISCV_CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
+$(OBJDIR)/%.elf:  $(OBJDIR) | $(OBJS) $(OBJS_ASM)
+	$(RISCV_CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
 
 %.hex: %.elf
 	$(RISCV_OBJCOPY) -O ihex $^ $@
@@ -56,6 +57,9 @@ $(OBJDIR)/%.elf: $(OBJS) | $(OBJDIR)
 	
 	
 %.asm: %.elf
+	$(RISCV_OBJDUMP) -S -d $^ > $@
+
+%.asm: %.o
 	$(RISCV_OBJDUMP) -S -d $^ > $@
 
 $(OBJDIR)/%.o: %.c

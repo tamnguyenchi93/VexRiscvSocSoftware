@@ -19,7 +19,7 @@
 
 #define GPIO_A_BASE    ((Gpio_Reg*)(0xF0000000))
 #define GPIO_B_BASE    ((Gpio_Reg*)(0xF0001000))
-#define UART      ((Uart_Reg*)(0xF0010000))
+#define UART           ((Uart_Reg*)(0xF0010000))
 #define VGA_BASE       ((Vga_Reg*)(0xF0030000))
 
 

@@ -37,6 +37,11 @@ static void uart_applyConfig(Uart_Reg *reg, Uart_Config *config){
 	reg->FRAME_CONFIG = ((config->dataLength-1) << 0) | (config->parity << 8) | (config->stop << 16);
 }
 
+static char uart_read(Uart_Reg *reg){
+	while(uart_readOccupancy(reg) == 0);
+	return reg->DATA;
+}
+
 #endif /* UART_H_ */
 
 
