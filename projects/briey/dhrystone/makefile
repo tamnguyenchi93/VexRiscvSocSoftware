@@ -16,7 +16,8 @@ LDFLAGS += -lc #Used to get memcpy/strcmp stuff only
 
 INC += -I../../../libs/
 INC += -I../libs/
-LDSCRIPT = ../libs/linker.ld
+# LDSCRIPT = ../libs/linker.ld
+LDSCRIPT = ./include/briey.ld
 
 
 include ../../../resources/gcc.mk

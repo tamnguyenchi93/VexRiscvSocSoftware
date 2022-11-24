@@ -40,7 +40,7 @@ OBJS_ASM :=$(OBJS:.o=.asm)
 OBJS := $(addprefix $(OBJDIR)/,$(OBJS))
 OBJS_ASM := $(addprefix $(OBJDIR)/,$(OBJS_ASM))
 
-all: $(OBJDIR)/$(PROJ_NAME).elf $(OBJDIR)/$(PROJ_NAME).hex $(OBJDIR)/$(PROJ_NAME).asm $(OBJDIR)/$(PROJ_NAME).v
+all: $(OBJDIR)/$(PROJ_NAME).elf $(OBJDIR)/$(PROJ_NAME).hex $(OBJDIR)/$(PROJ_NAME).asm $(OBJDIR)/$(PROJ_NAME).v $(OBJDIR)/$(PROJ_NAME).bin
 
 $(OBJDIR)/%.elf:  $(OBJDIR) | $(OBJS) $(OBJS_ASM)
 	$(RISCV_CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
